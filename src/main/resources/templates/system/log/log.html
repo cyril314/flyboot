@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='业务日志')">
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title"><h5>业务日志</h5></div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-3" th:include="include :: _time('beginTime','开始时间','false','YYYY-MM-DD')"></div>
+                                <div class="col-sm-3" th:include="include :: _time('endTime','结束时间','false','YYYY-MM-DD')"></div>
+                                <div class="col-sm-2" th:include="include :: _input(id='logName',name='日志名称')"></div>
+                                <div class="col-sm-2" th:include="include :: _select('logType','日志类型',~{::option})">
+                                    <option value="0">全部</option>
+                                    <option value="1">业务日志</option>
+                                    <option value="2">异常日志</option>
+                                </div>
+                                <div class="col-sm-2" th:include="include :: _button(id='oid',name='搜索',icon='fa-search',onFun='OptLog.search()')"></div>
+                            </div>
+                            <div class="hidden-xs" id="OptLogTableToolbar" role="group">
+                                <div class="col-sm-3" th:include="include :: _button(id='oed',name='查看详情',icon='fa-edit',onFun='OptLog.detail()')"></div>
+                            </div>
+                            <div th:include="include :: _table('OptLogTable')"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/modular/system/log/log.js}"></script>
+</div>
+</html>

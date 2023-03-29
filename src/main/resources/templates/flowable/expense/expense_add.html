@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='报销申请管理')">
+<div th:fragment="content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <input type="hidden" id="id" value="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <th:block th:include="include :: _input(id='money',name='报销金额',underline='true')"/>
+                        <th:block th:include="include :: _input(id='desc',name='报销描述')"/>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-12">
+                        <th:block th:include="include :: _button(id='ensure',name='提交',bCss='info',icon='fa-check',onFun='ExpenseInfoDlg.editSubmit()')"/>
+                        <th:block th:include="include :: _button(id='cancel',name='取消',bCss='danger',icon='fa-eraser',onFun='ExpenseInfoDlg.close()')"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script th:src="@{/modular/flowable/expense/expense_info.js}"></script>
+</div>
+</html>

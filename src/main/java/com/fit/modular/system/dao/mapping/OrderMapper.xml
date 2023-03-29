@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.modular.system.dao.OrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fit.modular.system.model.Order">
+        <id column="id" property="id" />
+        <result column="sn" property="sn" />
+        <result column="sub_sn" property="subSn" />
+        <result column="pay_time" property="payTime" />
+        <result column="name" property="name" />
+        <result column="main_pic" property="mainPic" />
+        <result column="link" property="link" />
+        <result column="sku_code" property="skuCode" />
+        <result column="sku_property" property="skuProperty" />
+        <result column="per_count" property="perCount" />
+        <result column="pay_price" property="payPrice" />
+        <result column="total_count" property="totalCount" />
+        <result column="total_price" property="totalPrice" />
+        <result column="buyer_remark" property="buyerRemark" />
+        <result column="seller_remark" property="sellerRemark" />
+        <result column="order_status" property="orderStatus" />
+        <result column="buyer_nickname" property="buyerNickname" />
+        <result column="seller_nickname" property="sellerNickname" />
+        <result column="buyer_name" property="buyerName" />
+        <result column="buyer_telephone" property="buyerTelephone" />
+        <result column="buyer_idcard" property="buyerIdcard" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="district" property="district" />
+        <result column="address" property="address" />
+        <result column="zipcode" property="zipcode" />
+        <result column="version" property="version" />
+        <result column="express_bag_name" property="expressBagName" />
+        <result column="express_bag_code" property="expressBagCode" />
+        <result column="express_name" property="expressName" />
+        <result column="express_code" property="expressCode" />
+        <result column="message" property="message" />
+        <result column="packer_name" property="packerName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sn, sub_sn AS subSn, pay_time AS payTime, name, main_pic AS mainPic, link, sku_code AS skuCode, sku_property AS skuProperty, per_count AS perCount, pay_price AS payPrice, total_count AS totalCount, total_price AS totalPrice, buyer_remark AS buyerRemark, seller_remark AS sellerRemark, order_status AS orderStatus, buyer_nickname AS buyerNickname, seller_nickname AS sellerNickname, buyer_name AS buyerName, buyer_telephone AS buyerTelephone, buyer_idcard AS buyerIdcard, province, city, district, address, zipcode, version, express_bag_name AS expressBagName, express_bag_code AS expressBagCode, express_name AS expressName, express_code AS expressCode, message, packer_name AS packerName
+    </sql>
+
+</mapper>

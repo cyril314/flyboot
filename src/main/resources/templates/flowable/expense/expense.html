@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='报销申请管理')">
+<div th:fragment="content">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>报销申请管理</h5></div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3" th:include="include :: _input(id='condition',name='名称')"/>
+                            <div class="col-sm-3">
+                                <th:block th:include="include :: _button(id='eid',name='搜索',icon='fa-search',onFun='Expense.search()')"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="ExpenseTableToolbar" role="group">
+                            <th:block th:include="include :: _button(name='新增',icon='fa-plus',onFun='Expense.openAddExpense()')"/>
+                        </div>
+                        <div th:include="include :: _table('ExpenseTable')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/modular/flowable/expense/expense.js}"></script>
+</div>
+</html>

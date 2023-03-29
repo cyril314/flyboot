@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='黑板')">
+<div th:fragment="content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="form-horizontal" id="userInfoForm">
+                <input type="hidden" id="id" th:value="${user?.id}">
+                <input type="hidden" id="sexValue" th:value="${user?.sex}">
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                        <th:block th:include="include :: _hInput(id='account',name='账户',underline='true',value=${user?.account})"/>
+                        <th:block th:include="include :: _hSelect(id='sex',name='性别',selOpt=~{::option},value=${user?.sex})">
+                            <option value="1" th:selected="${user?.sex==1?:'true'}">男</option>
+                            <option value="2" th:selected="${user?.sex==2?:'true'}">女</option>
+                        </th:block>
+                        <th:block th:include="include :: _hInput(id='roleid',name='角色',underline='true',value=${roleName},disabled='disabled')"/>
+                        <th:block th:include="include :: _hInput(id='email',name='邮箱',value=${user?.email},type='email')"/>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="driverInfoContent">
+                            <th:block th:include="include :: _hInput(id='name',name='姓名',underline='true',value=${user?.name})"/>
+                            <th:block th:include="include :: _hInput(id='birthday',name='出生日期',value=${#dates.format(user?.birthday, 'yyyy-MM-dd')},type='date',
+                             onFun='laydate({istime: false, format: \'YYYY-MM-DD\'})')"/>
+                            <th:block th:include="include :: _hInput(id='citySel',name='部门',value=${deptName},style='background-color: #ffffff !important;',underline='true',
+						readonly='readonly', hidFlag='true',hid='deptid',hiddenValue=${user?.deptid},onFun='UserInfoDlg.showDeptSelectTree(); return false;')"/>
+                            <th:block th:include="include :: _hInput(id='phone',name='电话',value=${user?.phone})"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- 这是部门选择的下拉框 -->
+                <div id="menuContent" class="menuContent" style="display: none; position: absolute; z-index: 200;">
+                    <ul id="treeDemo" class="ztree tree-box" style="width: 249px !important;"></ul>
+                </div>
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10">
+                        <th:block th:include="include :: _button(id='ensure',name='提交',bCss='info',icon='fa-check',onFun='UserInfoDlg.addSubmit()')"/>
+                        <th:block th:include="include :: _button(id='cancel',name='取消',bCss='danger',icon='fa-eraser',onFun='UserInfoDlg.close()')"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/modular/system/user/user_info.js}"></script>
+</div>
+</html>

@@ -1,0 +1,41 @@
+# 开发环境配置
+server:
+  # 服务端口
+  port: 80
+  servlet:
+    # 项目contextPath
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fly?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: root
+    db-name: fly
+    filters: log4j,wall,mergeStat
+  redis:
+    host: localhost
+    port: 6379
+    password:
+fit:
+  swagger-open: false
+  kaptcha-open: true
+  # flowable数据源和多数据源配置
+  flowable:
+    datasource:
+      url: jdbc:mysql://localhost:3306/fly_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: root
+      password: root
+    muti-datasource:
+      default-dataSource-name: dataSourceFit #默认的数据源名称
+      url: jdbc:mysql://localhost:3306/fly_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: root
+      password: root

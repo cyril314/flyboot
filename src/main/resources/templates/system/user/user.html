@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='用户管理')">
+<div th:fragment="content">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>用户管理</h5></div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">组织机构</div>
+                                    <div class="panel-body dept-tree">
+                                        <ul id="deptTree" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 col-sm-9">
+                                <div class="row">
+                                    <div class="col-lg-10 col-sm-9">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12" th:include="include :: _input(id='name',name='注册用户名称',hint='帐号/姓名/手机号')"></div>
+                                            <div class="col-lg-4 col-sm-6" th:include="include :: _time('beginTime','注册开始日期','false','YYYY-MM-DD')"></div>
+                                            <div class="col-lg-4 col-sm-6" th:include="include :: _time('endTime','注册结束时间','false','YYYY-MM-DD')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-3">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12">
+                                                <th:block th:include="include :: _button(id='uid',name='搜索',icon='fa-search',bCss='true',onFun='MgrUser.search()')"/>
+                                                <th:block th:include="include :: _button(id='rid',name='重置',icon='fa-trash',onFun='MgrUser.resetSearch()')"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hidden-xs" id="managerTableToolbar" role="group">
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/add')}" th:include="include :: _button(name='添加',icon='fa-plus',onFun='MgrUser.openAddMgr()')"/>
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/edit')}" th:include="include :: _button(name='修改',icon='fa-edit',onFun='MgrUser.openChangeUser()')"/>
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/delete')}" th:include="include :: _button(name='删除',icon='fa-remove',onFun='MgrUser.delMgrUser()')"/>
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/reset')}" th:include="include :: _button(name='重置密码',icon='fa-refresh',onFun='MgrUser.resetPwd()')"/>
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/freeze')}" th:include="include :: _button(name='冻结',icon='fa-warning',onFun='MgrUser.freezeAccount()')"/>
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/unfreeze')}" th:include="include :: _button(name='解除冻结',icon='fa-check-circle',onFun='MgrUser.unfreeze()')"/>
+                                    <th:block th:if="*{@shiro.hasPermission('/mgr/setRole')}" th:include="include :: _button(name='角色分配',icon='fa-user-secret',onFun='MgrUser.roleAssign()')"/>
+                                </div>
+                                <div th:include="include :: _table('managerTable')"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/modular/system/user/user.js}"></script>
+</div>
+</html>

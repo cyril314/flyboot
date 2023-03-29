@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='黑板')">
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>登录日志</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-3" th:include="include :: _time('beginTime','开始时间','false','YYYY-MM-DD')"></div>
+                                <div class="col-sm-3" th:include="include :: _time('endTime','结束时间','false','YYYY-MM-DD')"></div>
+                                <div class="col-sm-3" th:include="include :: _input(id='logName',name='日志名称')"></div>
+                                <div class="col-sm-3" th:include="include :: _button(id='lid',name='搜索',icon='fa-search')"></div>
+                            </div>
+                            <div class="hidden-xs" id="LoginLogTableToolbar" role="group">
+                                <div class="col-sm-3" th:include="include :: _button(id='did',name='清空日志',icon='fa-remove',onFun='LoginLog.delLog()')"></div>
+                            </div>
+                            <div th:include="include :: _table('LoginLogTable')"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/modular/system/log/login_log.js}"></script>
+</div>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='修改密码')">
+<div th:fragment="content">
+    <div class="col-sm-4  col-sm-offset-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>修改密码</h5></div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content" style="border:none !important; ">
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <th:block th:include="include :: _hInput(id='oldPwd',name='原密码',underline='true',type='password')"/>
+                                            <th:block th:include="include :: _hInput(id='newPwd',name='新密码',underline='true',type='password')"/>
+                                            <th:block th:include="include :: _hInput(id='rePwd',name='新密码验证',type='password')"/>
+                                        </div>
+                                    </div>
+                                    <div class="row btn-group-m-t">
+                                        <div class="col-sm-10">
+                                            <th:block th:include="include :: _button(id='ensure',name='提交',bCss='info',icon='fa-check',onFun='UserInfoDlg.chPwd()')"/>
+                                            <th:block th:include="include :: _button(id='cancel',name='取消',bCss='danger',icon='fa-eraser',onFun='UserInfoDlg.close()')"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/modular/system/user/user_info.js}"></script>
+</div>
+</html>

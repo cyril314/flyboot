@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='编辑信息')">
+<div th:fragment="content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="form-horizontal" id="noticeInfoForm">
+                <input type="hidden" id="id" th:value="${notice?.id}">
+                <input type="hidden" id="contentVal" th:value='${notice?.content}'>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">标题</label>
+                            <div class="col-sm-11">
+                                <input class="form-control" id="title" name="title" type="text" th:value="${notice?.title}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">内容</label>
+                            <div class="col-sm-11">
+                                <div id="editor" class="editorHeight"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10">
+                        <th:block th:include="include :: _button(id='ensure',name='提交',bCss='info',icon='fa-check',onFun='NoticeInfoDlg.editSubmit()')"/>
+                        <th:block th:include="include :: _button(id='cancel',name='取消',bCss='danger',icon='fa-eraser',onFun='NoticeInfoDlg.close()')"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/plugins/wangEditor/wangEditor.js}"></script>
+    <script type="text/javascript" th:src="@{/modular/system/notice/notice_info.js}"></script>
+</div>
+</html>

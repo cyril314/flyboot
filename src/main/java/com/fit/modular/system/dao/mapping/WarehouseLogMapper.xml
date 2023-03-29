@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.modular.system.dao.WarehouseLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fit.modular.system.model.WarehouseLog">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="price" property="price" />
+        <result column="brand" property="brand" />
+        <result column="catalog" property="catalog" />
+        <result column="type" property="type" />
+        <result column="specification" property="specification" />
+        <result column="stock" property="stock" />
+        <result column="op_type" property="opType" />
+        <result column="main_pic" property="mainPic" />
+        <result column="status" property="status" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_user_name" property="createUserName" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_user_name" property="updateUserName" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, code, name, price, brand, catalog, type, specification, stock, op_type AS opType, main_pic AS mainPic, status, create_user_id AS createUserId, create_user_name AS createUserName, create_time AS createTime, update_user_id AS updateUserId, update_user_name AS updateUserName, update_time AS updateTime
+    </sql>
+
+</mapper>

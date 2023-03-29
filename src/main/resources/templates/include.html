@@ -1,0 +1,267 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 头部信息 -->
+<head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+    <link th:href="@{/favicon.ico}" rel="shortcut icon">
+    <link th:href="@{/css/bootstrap.min.css?v=3.3.6}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.css?v=4.4.0}" rel="stylesheet">
+    <link th:href="@{/css/style.css?v=4.1.0}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+    <script type="text/javascript" th:src="@{/js/plugins/layer/layer.min.js?v=3.1.0}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+</head>
+<!-- 头部信息 -->
+<div th:fragment="_tabs">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu" th:each="title : ${titles}">
+                <li class="nav-header" th:if="${titleStat.index==0}">
+                    <div class="dropdown profile-element">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
+                            <span class="clear">
+                                <span class="block m-t-xs"><strong class="font-bold" th:text="${username}">用户名</strong></span>
+                                <span class="text-muted text-xs block" th:text="${rolename}">角色名<b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="J_menuItem" th:href="@{/mgr/user_info}">个人资料</a></li>
+                            <li><a class="J_menuItem" th:href="@{/mgr/user_chpwd}">修改密码</a></li>
+                            <li class="divider"/>
+                            <li><a th:href="@{/logout}">安全退出</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">FIT</div>
+                </li>
+                <li th:if="${#lists.isEmpty(title.children)}">
+                    <a href="javascript:;" class="J_menuItem" th:href="${title.url}" th:name="tabMenuItem">
+                        <i class="fa" th:classappend="${title.icon}"></i>
+                        <span class="nav-label" th:text="${title.name}">菜单名</span>
+                    </a>
+                </li>
+                <li th:unless="${#lists.isEmpty(title.children)}">
+                    <a href="javascript:;">
+                        <i class="fa" th:classappend="${title.icon}"></i>
+                        <span class="nav-label" th:text="${title .name}">菜单名</span>
+                        <span class="fa arrow"/>
+                    </a>
+                    <ul class="nav nav-second-level" th:each="subTitle : ${title.children}">
+                        <li th:if="${#lists.isEmpty(subTitle.children)}">
+                            <a class="J_menuItem" th:href="${subTitle.url}" th:name="tabMenuItem">
+                                <i class="fa" th:classappend="${subTitle.icon}"></i>
+                                <span class="nav-label" th:text="${subTitle.name}">菜单名</span>
+                            </a>
+                        </li>
+                        <li th:unless="${#lists.isEmpty(subTitle.children)}">
+                            <a href="javascript:;">
+                                <i class="fa" th:classappend="${subTitle.icon}"></i>
+                                <span class="nav-label" th:text="${subTitle.name}">菜单名</span>
+                                <span class="fa arrow"/>
+                            </a>
+                            <ul class="nav nav-third-level" th:each="thirdTitle : ${subTitle.children}">
+                                <li>
+                                    <a class="J_menuItem" th:href="${thirdTitle.url}" th:name="tabMenuItem">
+                                        <i class="fa" th:classappend="${thirdTitle.icon}"></i>
+                                        <span class="nav-label" th:text="${thirdTitle.name}">菜单名</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div th:fragment="_theme">
+    <div id="right-sidebar">
+        <div class="sidebar-container">
+            <ul class="nav nav-tabs navs-3">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1"><i class="fa fa-gear"></i> 主题 </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="sidebar-title">
+                        <h3><i class="fa fa-comments-o"></i> 主题设置 </h3>
+                        <small><i class="fa fa-tim"></i> 你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。</small>
+                    </div>
+                    <div class="skin-setttings">
+                        <div class="title">主题设置</div>
+                        <div class="setings-item">
+                            <span>收起左侧菜单</span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
+                                    <label class="onoffswitch-label" for="collapsemenu">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setings-item">
+                            <span>固定顶部</span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
+                                    <label class="onoffswitch-label" for="fixednavbar">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setings-item">
+                            <span> 固定宽度 </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
+                                    <label class="onoffswitch-label" for="boxedlayout">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title">皮肤选择</div>
+                        <div class="setings-item default-skin nb">
+                            <span class="skin-name "><a href="#" class="s-skin-0"> 默认皮肤 </a></span>
+                        </div>
+                        <div class="setings-item blue-skin nb">
+                            <span class="skin-name "><a href="#" class="s-skin-1"> 蓝色主题 </a></span>
+                        </div>
+                        <div class="setings-item yellow-skin nb">
+                            <span class="skin-name "><a href="#" class="s-skin-3"> 黄色/紫色主题 </a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 尾部信息 -->
+<div th:fragment="_footer">
+    <div class="layui-footer">
+        <p>© 2022 <a href="#" target="_blank">aim</a></p>
+    </div>
+    <!-- 移动端遮罩 -->
+    <div class="site-mobile-shade"></div>
+</div>
+
+<div th:fragment="_button">
+    <button type="button" th:class="${bCla}?:'btn btn-primary'" th:classappend="${bCss}?:'button-margin'" th:onclick="[(${onFun})]" th:id="${id}">
+        <i class="fa" th:classappend="${icon}"></i>&nbsp;[(${name})]
+    </button>
+</div>
+
+<div th:fragment="_input">
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" th:text="${name}">查询名</button>
+        </div>
+        <input type="text" class="form-control" th:id="${id}" th:placeholder="${hint}"/>
+    </div>
+</div>
+
+<div th:fragment="_hInput">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">[(${name})]</label>
+        <div class="col-sm-9">
+            <input class="form-control" th:type="${type}?:'text'" th:id="${id}" th:name="${id}" th:value="${value}" th:disabled="${disabled}"
+                   th:style="${style}" th:readonly="${readonly}" th:onclick="[(${onFun})]"/>
+        </div>
+    </div>
+    <input th:if="${hidFlag}" type="hidden" th:id="${hid}" th:value="${hidValue}"/>
+    <div th:if="${selFlag}" th:id="${selectId}" style="display: none; position: absolute; z-index: 200;">
+        <ul th:id="${selectTreeId}" class="ztree tree-box" th:style="${selectStyle}"></ul>
+    </div>
+    <div class="hr-line-dashed" th:if="${underline}==null"></div>
+</div>
+
+<div th:fragment="_time(id,name,isTime,pattern)">
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" th:text="${name}">按钮名</button>
+        </div>
+        <input type="text" class="form-control layer-date" th:onclick="laydate({istime: [[${isTime}]], format: [[${pattern}]]})" th:id="${id}"/>
+    </div>
+</div>
+
+<div th:fragment="_table(tid)">
+    <table th:id="${tid}" data-mobile-responsive="true" data-click-to-select="true">
+        <thead>
+            <tr>
+                <th data-field="selectItem" data-checkbox="true"></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div th:fragment="_select(id,name,selOpt)">
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" th:text="${name}">选项</button>
+        </div>
+        <style>
+            .chosen-container-single .chosen-single {
+                position: relative;
+                display: block;
+                overflow: hidden;
+                padding: 0 0 0 8px;
+                border: 1px solid #e5e6e7;
+                border-radius: 0px;
+                background-color: #fff;
+                background: none;
+                background: none;
+                background-clip: padding-box;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                color: #444;
+                text-decoration: none;
+                white-space: nowrap;
+                line-height: 32px;
+            }
+        </style>
+        <select class="form-control" th:id="${id}" style="border-radius:0px">
+            <th:block th:replace="${selOpt}"/>
+        </select>
+        <div class="hr-line-dashed" th:if="${underline}==null"></div>
+    </div>
+</div>
+
+<div th:fragment="_hSelect">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">[(${name})]</label>
+        <div class="col-sm-9">
+            <select class="form-control" th:id="${id}" th:name="${id}" th:value="${value}">
+                <th:block th:replace="${selOpt}"/>
+            </select>
+            <input th:if="${hidFlag}" class="form-control" type="hidden" th:id="${hid}" th:value="${hidValue}">
+        </div>
+    </div>
+    <div class="hr-line-dashed" th:if="${underline}==null"></div>
+</div>
+<div th:fragment="_avatar">
+    <div class="form-group">
+        <label class="col-sm-3 control-label head-scu-label" th:text="${name}">头像</label>
+        <div class="col-sm-4">
+            <div th:id="${id}PreId">
+                <div><img width="100px" height="100px" th:src="*{avatarImg} ? '/kaptcha/'*{avatarImg} : '/static/img/girl.gif'"></div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="head-scu-btn upload-btn" id="${id}BtnId">
+                <i class="fa fa-upload"></i>&nbsp;上传
+            </div>
+        </div>
+        <input type="hidden" id="${id}" value="${avatarImg!}"/>
+    </div>
+    <div class="hr-line-dashed" th:if="${underline}==null"></div>
+</div>
+</html>

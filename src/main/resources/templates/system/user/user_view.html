@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='用户视图')">
+<div th:fragment="content">
+    <div class="col-sm-6  col-sm-offset-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>用户视图</h5></div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content" style="border:none !important; ">
+                                <div class="form-horizontal" id="userInfoForm">
+                                    <input type="hidden" id="id" th:value="${user?.id}">
+                                    <input type="hidden" id="sexValue" th:value="${user?.sex}">
+
+                                    <div class="row">
+                                        <div class="col-sm-6 b-r">
+                                            <th:block th:include="include :: _avatar(id='avatar',name='头像',underline='true',avatarImg=${user?.avatar})" />
+                                            <th:block th:include="include :: _hInput(id='account',name='账户',underline='true',value=${user?.account},disabled='disabled')"/>
+                                            <th:block th:include="include :: _hSelect('sex','性别',~{::option})">
+                                                <option value="1" th:selected="${user?.sex==1?:'selected'}">男</option>
+                                                <option value="2" th:selected="${user?.sex==2?:'selected'}">女</option>
+                                            </th:block>
+                                            <th:block th:include="include :: _hInput(id='roleid',name='角色',underline='true',value=${roleName},disabled='disabled')"/>
+                                            <th:block th:include="include :: _hInput(id='email',name='邮箱',underline='true',value=${user?.email},disabled='disabled')"/>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div id="driverInfoContent">
+                                            <th:block th:include="include :: _hInput(id='name',name='姓名',underline='true',value=${user?.name},disabled='disabled')"/>
+                                            <th:block th:include="include :: _hInput(id='birthday',name='出生日期',value=${#dates.format(user?.birthday, 'yyyy-MM-dd')},
+                                                type='date',onFun='laydate({istime: false, format: \'YYYY-MM-DD\'})',disabled='disabled')"/>
+                                            <th:block th:include="include :: _hInput(id='citySel',name='部门',value=${deptName},readonly='readonly',underline='true',
+						                        hidFlag='true',hid='deptid',hiddenValue=${user?.deptid},style='width:250px !important;',
+						                        selFlag='true',selectId='menuContent',selectTreeId='treeDemo',onFun='UserInfoDlg.showInfoDeptSelectTree(); return false;')"/>
+                                            <th:block th:include="include :: _hInput(id='phone',name='电话',underline='true',value=${user?.phone},disabled='disabled')"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="progress progress-striped" id="progressTipArea" style="margin-top: 20px;">
+                                    <div id="progressBar" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar"
+                                         class="progress-bar progress-bar-info">
+                                    </div>
+                                </div>
+
+                                <div class="row btn-group-m-t">
+                                    <div class="col-sm-10">
+                                        <th:block th:include="include :: _button(id='ensure',name='提交',bCss='info',icon='fa-check',onFun='UserInfoDlg.editSubmit()')"/>
+                                        <th:block th:include="include :: _button(id='cancel',name='取消',bCss='danger',icon='fa-eraser',onFun='UserInfoDlg.close()')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/modular/system/user/user_info.js}"></script>
+</div>
+</div>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='黑板')">
+<div th:fragment="content">
+    <div class="container-fluid" style="padding: 20px !important;">
+        <div class="row">
+            <div class="col-sm-12" th:each="notice : ${noticeList}">
+                <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <span th:text="${notice.content}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

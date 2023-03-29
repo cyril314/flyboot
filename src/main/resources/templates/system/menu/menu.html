@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='菜单管理')">
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title"><h5>菜单管理</h5></div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-3" th:include="include :: _input(id='menuName',name='菜单名称')"></div>
+                                <div class="col-sm-3" th:include="include :: _input(id='level',name='层级')"></div>
+                                <div class="col-sm-3" th:include="include :: _button(id='mid',name='搜索',icon='fa-search')"></div>
+                            </div>
+                            <div class="hidden-xs" id="menuTableToolbar" role="group">
+                                <th:block th:if="*{@shiro.hasPermission('/menu/add')}" th:include="include :: _button(name='添加',icon='fa-plus',onFun='Menu.openAddMenu()')"/>
+                                <th:block th:if="*{@shiro.hasPermission('/menu/update')}" th:include="include :: _button(name='修改',icon='fa-edit',onFun='Menu.openChangeMenu()')"/>
+                                <th:block th:if="*{@shiro.hasPermission('/menu/delete')}" th:include="include :: _button(name='删除',icon='fa-remove',onFun='Menu.delMenu()')"/>
+                            </div>
+                            <div th:include="include :: _table('menuTable')"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/modular/system/menu/menu.js}"></script>
+</div>
+</html>

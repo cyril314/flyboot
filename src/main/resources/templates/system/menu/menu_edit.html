@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="increase(title='黑板')">
+<div th:fragment="content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="form-horizontal" id="menuInfoForm">
+                <input type="hidden" id="id" value="${menu.id}">
+                <input type="hidden" id="ismenuValue" value="${menu.ismenu}">
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                        <th:block th:include="include :: _hInput(id='name',name='菜单名称',underline='true',value=${menu?.name})"/>
+                        <th:block th:include="include :: _hInput(id='code',name='菜单编号',underline='true',value=${menu?.code})"/>
+                        <th:block th:include="include :: _hInput(id='pcodeName',name='父级编号',value=${menu?.pcodeName},style='background-color: #ffffff !important;',
+						readonly='readonly', hidFlag='true',hid='pcode',hiddenValue=${menu?.pcode},onFun='MenuInfoDlg.showMenuSelectTree(); return false;',
+                        underline='true',selFlag='true',selectId='pcodeTreeDiv',selectTreeId='pcodeTree',selectStyle='width:244px !important;')"/>
+                        <th:block th:include="include :: _hSelect(id='ismenu',name='是否菜单',selOpt=~{::option},value=${menu?.ismenu})">
+                            <option value="1" th:selected="${menu?.ismenu==1?:'true'}">是</option>
+                            <option value="0" th:selected="${menu?.ismenu==0?:'true'}">不是</option>
+                        </th:block>
+                </div>
+                <div class="col-sm-6">
+                    <th:block th:include="include :: _hInput(id='url',name='请求地址',underline='true',value=${menu?.url})"/>
+                    <th:block th:include="include :: _hInput(id='num',name='菜单排序',underline='true',value=${menu?.num})"/>
+                    <th:block th:include="include :: _hInput(id='icon',name='菜单图标',underline='true',value=${menu?.icon})"/>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <th:block th:include="include :: _button(id='ensure',name='提交',bCss='info',icon='fa-check',onFun='MenuInfoDlg.editSubmit()')"/>
+                    <th:block th:include="include :: _button(id='cancel',name='取消',bCss='danger',icon='fa-eraser',onFun='MenuInfoDlg.close()')"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/modular/system/menu/menu_info.js}"></script>
+</div>
+</html>
