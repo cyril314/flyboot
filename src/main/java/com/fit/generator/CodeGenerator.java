@@ -1,7 +1,5 @@
 package com.fit.generator;
 
-
-import com.fit.core.util.ToolUtil;
 import com.fit.generator.config.GeneratorConfig;
 
 /**
